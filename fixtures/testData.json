@@ -1,0 +1,41 @@
+{
+    "baseUrl": "https://demowebshop.tricentis.com/",
+    "registValid": {
+        "fname": "Euno",
+        "lname": "Natsuki",
+        "email": "ueno.natsuki@gmail.com",
+        "pass": "Nats1234!",
+        "confirmPass": "Nats1234!"
+    },
+    "loginValid": {
+        "email": "ueno.natsuki@gmail.com",
+        "pass": "Nats1234!"
+    },
+    "loginInvalid": {
+        "email": "emailsalah@gmail.com",
+        "pass": "passwordsalah"
+    },
+    "accountName": "ueno.natsuki@gmail.com",
+    "errorAccount": "Its not Natsuki Account!",
+    "message": {
+        "successRegist": "your registration completed",
+        "expectedLoginError": "Login was unsuccessful. Please correct the errors and try again",
+        "loginSuccess": "Login was successfull",
+        "loginFailed": " Login failed!",
+        "logoDisappear": "Logo not found",
+        "logoutButtonDisappear": "Logout button not found",
+        "bookEmpty": "Book list not found"
+    },
+    "log": {
+        "registPassed": "Registration Test Passed!",
+        "loginPassed": "Login Test Passed",
+        "loginFailed": "Login test Failed",
+        "allBookList": "All book list appears"
+    },
+    "bookList": {
+        "book1": "Computing and Internet",
+        "book2": "Health Book",
+        "book3": "Science"
+    }
+
+}
