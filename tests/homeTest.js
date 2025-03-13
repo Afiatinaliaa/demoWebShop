@@ -24,19 +24,29 @@ async function HomeTest() {
             await homePage.open(testData.baseUrl)
         })
 
-        it("TCH001 - View Book Product Category List", async function() {
+        // it("TCH001 - View Book Product Category List", async function() {
+        //     this.timeout(10000)
+        //     await homePage.viewBookCategory();
+        //     await homePage.scrollToBottom();
+        //     await homePage.getBookItems();
+
+        //     //assertion
+        //     await homePage.verifyBookList(testData.bookList.book1, testData.bookList.book2, testData.bookList.book3, testData.message.bookEmpty)
+        //     await console.log(testData.log.allBookList)
+
+        // })
+
+        it("TCH002 - Add Single Product To Cart", async function() {
             this.timeout(10000)
-            await homePage.viewBookCategory();
-            await homePage.scrollToBottom();
-            await homePage.getBookItems();
+            await homePage.addToCart();
 
             //assertion
-            await homePage.verifyBookList(testData.bookList.book1, testData.bookList.book2, testData.bookList.book3, testData.message.bookEmpty)
-            await console.log(testData.log.allBookList)
-
+            await homePage.verifyItemOnCart(testData.message.bookEmpty)
+            await console.log("success add to cart")
         })
-
     })
 }
 
 HomeTest()
+
+module.exports = HomeTest;

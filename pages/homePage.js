@@ -12,8 +12,11 @@ class HomePage{
         this.logoutButton = By.css(".ico-logout");
         this.bookTabs = By.xpath("//ul[@class='top-menu']//a[normalize-space()='Books']");
         this.bookItems = By.css(".product-grid");
-        // this.bookItem1 = By.css("body > div:nth-child(4) > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1)")
-        // this.bookItem2 = By.css("body > div:nth-child(4) > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(3) > div:nth-child(1)")
+        this.addToCartBook1 = By.css("body > div:nth-child(4) > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > input:nth-child(1)");
+        this.addToCartBook2 = By.css("body > div:nth-child(4) > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > input:nth-child(1)");
+        this.addToCartSuccess = By.css("#bar-notification")
+        this.cartAfterAddItem1 = By.css("li[id='topcartlink'] a[class='ico-cart']")
+        this.item1 = By.css("td[class='product']")
     }
 
     async open(url) {
@@ -65,6 +68,17 @@ class HomePage{
         console.log("Book List:", bookList);  // Debugging
         console.log("Expected Text:", expectedText);
         assert.strictEqual(bookList.includes(expectedText), true, message)
+    }
+
+    async addToCart(){
+        await this.driver.findElement(this.bookTabs).click();
+        await this.driver.findElement(this.addToCartBook1).click()
+        await this.driver.findElement(this.cartAfterAddItem1).click()
+    }
+
+    async verifyItemOnCart(message) {
+        const item1 = await this.driver.findElement(this.item1);
+        assert.ok(await item1.isDisplayed(), true, message)
     }
 }
 

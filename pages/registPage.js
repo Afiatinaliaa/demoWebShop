@@ -14,6 +14,7 @@ class RegistPage{
         this.confirmPassField = By.id("ConfirmPassword");
         this.registerButton = By.id("register-button");
         this.continueButton = By.css("input[value='Continue']");
+        this.successText = By.css("div[class='page-title'] h1")
     }
 
     async open (url){
@@ -29,9 +30,29 @@ class RegistPage{
         await this.driver.findElement(this.passField).sendKeys(pass)
         await this.driver.findElement(this.confirmPassField).sendKeys(confirmPass)
         await this.driver.findElement(this.registerButton).click()
-        await this.driver.wait(until.elementLocated(this.continueButton), 20000);
-        await this.driver.findElement(this.continueButton).click()
+        await this.sleep(10000);
+        // await this.driver.wait(until.elementLocated(this.continueButton), 20000);
+        //await this.driver.findElement(this.continueButton).click()
     }
+
+    // async getSuccessPage() {
+    //     return await this.driver.findElement(this.successText).getText();
+    // }
+    // async verifySuccessRegist(expectedText, message) {
+    //     const successregist = await this.getSuccessPage();
+    //     assert.strictEqual(successregist.includes(expectedText), true, message)
+    // }
+
+    async getSuccessPage() {
+        return await this.driver.findElement(this.successText).getText();
+    }
+    
+    async verifySuccessRegist(expectedText, message) {
+        const successregist = await this.getSuccessPage();
+        console.log("✅ Actual Success Message:", successregist); // Debugging
+        assert.strictEqual(successregist.includes(expectedText), true, message);
+    }
+    
 
 }
 

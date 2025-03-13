@@ -1,11 +1,13 @@
 {
     "baseUrl": "https://demowebshop.tricentis.com/",
+    "cartUrl": "https://demowebshop.tricentis.com/cart",
+    "checkoutUrl": "https://demowebshop.tricentis.com/onepagecheckout",
     "registValid": {
-        "fname": "Euno",
-        "lname": "Natsuki",
-        "email": "ueno.natsuki@gmail.com",
-        "pass": "Nats1234!",
-        "confirmPass": "Nats1234!"
+        "fname": "lee",
+        "lname": "Kina",
+        "email": "lee.kinal@gmail.com",
+        "pass": "Hana1234!",
+        "confirmPass": "Hana1234!"
     },
     "loginValid": {
         "email": "ueno.natsuki@gmail.com",
@@ -18,13 +20,15 @@
     "accountName": "ueno.natsuki@gmail.com",
     "errorAccount": "Its not Natsuki Account!",
     "message": {
-        "successRegist": "your registration completed",
+        "successRegist": "Register",
+        "failedRegist": "Your registration failed. Please try again!",
         "expectedLoginError": "Login was unsuccessful. Please correct the errors and try again",
         "loginSuccess": "Login was successfull",
         "loginFailed": " Login failed!",
         "logoDisappear": "Logo not found",
         "logoutButtonDisappear": "Logout button not found",
-        "bookEmpty": "Book list not found"
+        "bookEmpty": "Book list not found",
+        "item1Disappear": "Book not found"
     },
     "log": {
         "registPassed": "Registration Test Passed!",
