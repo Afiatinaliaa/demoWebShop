@@ -18,6 +18,19 @@ class CheckoutPage {
         this.phoneField = By.id("BillingNewAddress_PhoneNumber")
         this.faxField = By.id("BillingNewAddress_FaxNumber")
         this.continueButton = By.css("input[onclick='Billing.save()']")
+        this.pickupRadioBtn = By.css("#PickUpInStore")
+        this.continueButtonStep2 = By.xpath("//input[@onclick='Shipping.save()']")
+        this.groundRadioBtn = By.id("shippingoption_0")
+        this.nextDayRadioBtn = By.css("#shippingoption_1")
+        this.secondAirRadioBtn = By.id("shippingoption_2")
+        this.continueButtonStep3 = By.css("input[class='button-1 shipping-method-next-step-button']")
+        this.poRadioBtn = By.css("#paymentmethod_3")
+        this.continueButtonStep4 = By.css("input[class='button-1 payment-method-next-step-button']")
+        this.poNumberField = By.id("PurchaseOrderNumber")
+        this.continueButtonStep5 = By.css("input[class='button-1 payment-info-next-step-button']")
+        this.continueButtonStep6 = By.css("input[value='Confirm']")
+        this.successCheckout = By.css(".section.order-completed")
+        this.continueButtonSuccess = By.css("input[value='Continue']")
     }
 
     async open(url) {
@@ -29,25 +42,86 @@ class CheckoutPage {
     }
 
     async billingAddress() {
-        await this.driver.findElement(this.companyField).sendKeys("PT Big Textile");
+        // await this.driver.findElement(this.companyField).sendKeys("PT Big Textile");
 
-        const actions = this.driver.actions();
-        const countryDrop = await this.driver.findElement(this.countryDrop).click()
-        const selectCountry = await this.driver.findElement(By.xpath("//*[contains(text(), 'Canada')]"))
-        await selectCountry.click()
+        // const actions = this.driver.actions();
+        // const countryDrop = await this.driver.findElement(this.countryDrop).click()
+        // const selectCountry = await this.driver.findElement(By.xpath("//*[contains(text(), 'Canada')]"))
+        // await selectCountry.click()
 
-        const stateDrop = await this.driver.findElement(this.stateDrop).click()
-        await this.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Ontario')]")), 5000);
-        const selectState = await this.driver.findElement(By.xpath("//*[contains(text(), 'Ontario')]"))
-        await selectState.click()
+        // const stateDrop = await this.driver.findElement(this.stateDrop).click()
+        // await this.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Ontario')]")), 5000);
+        // const selectState = await this.driver.findElement(By.xpath("//*[contains(text(), 'Ontario')]"))
+        // await selectState.click()
 
-        await this.driver.findElement(this.cityField).sendKeys("Toronto");
-        await this.driver.findElement(this.address1Field).sendKeys("Toronto Street No. 7")
-        await this.driver.findElement(this.address2Field).sendKeys("Near Toronto Supermarket")
-        await this.driver.findElement(this.pCodeField).sendKeys("12345")
-        await this.driver.findElement(this.phoneField).sendKeys("+91 000 111")
-        await this.driver.findElement(this.faxField).sendKeys("000111222")
+        // await this.driver.findElement(this.cityField).sendKeys("Toronto");
+        // await this.driver.findElement(this.address1Field).sendKeys("Toronto Street No. 7")
+        // await this.driver.findElement(this.address2Field).sendKeys("Near Toronto Supermarket")
+        // await this.driver.findElement(this.pCodeField).sendKeys("12345")
+        // await this.driver.findElement(this.phoneField).sendKeys("+91 000 111")
+        // await this.driver.findElement(this.faxField).sendKeys("000111222")
         await this.driver.findElement(this.continueButton).click()
+    }
+
+    async shippingAddress() {
+        // await this.driver.sleep(20000)
+        // await this.driver.findElement(this.pickupRadioBtn).click()
+        const continueBtn2 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep2)), 20000);
+        await continueBtn2.click();
+    }
+
+    async shippingMethod() {
+        // await nextdayOption.click();
+        await this.driver.wait(until.elementLocated(this.nextDayRadioBtn), 20000);
+        // Tunggu hingga elemen benar-benar terlihat di layar
+        const nextdayOption = await this.driver.wait(
+        until.elementIsVisible(this.driver.findElement(this.nextDayRadioBtn)), 
+        20000);
+        await nextdayOption.click();
+
+        const continueBtn3 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep3)), 20000);
+        await continueBtn3.click();
+        // await this.driver.findElement(this.nextDayRadioBtn).click()
+        // await this.driver.findElement(this.continueButtonStep3).click()
+    }
+
+    async paymentMethod() {
+        // await nextdayOption.click();
+        await this.driver.wait(until.elementLocated(this.poRadioBtn), 20000);
+        // Tunggu hingga elemen benar-benar terlihat di layar
+        const poOption = await this.driver.wait(
+        until.elementIsVisible(this.driver.findElement(this.poRadioBtn)), 
+        20000);
+        await poOption.click();
+
+        const continueBtn4 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep4)), 20000);
+        await continueBtn4.click();
+        // await this.driver.findElement(this.poRadioBtn).click()
+        // await this.driver.findElement(this.continueButtonStep4).click()
+    }
+
+    async paymentInfo() {
+        await this.driver.wait(until.elementLocated(this.poNumberField), 20000);
+        // Tunggu hingga elemen benar-benar terlihat di layar
+        const poInput = await this.driver.wait(
+        until.elementIsVisible(this.driver.findElement(this.poNumberField)), 
+        20000);
+        await poInput.sendKeys("000111222");
+        const continueBtn5 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep5)), 20000);
+        await continueBtn5.click();
+        // await this.driver.findElement(this.poNumberField).sendKeys("000111222")
+        // await this.driver.findElement(this.continueButtonStep5).click()
+    }
+
+    async confirmOrder() {
+        const continueBtn6 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep6)), 20000);
+        await continueBtn6.click();
+        // await this.driver.findElement(this.continueButtonStep6).click()
+    }
+
+    async verifySuccessCheckout(message) {
+        const checkoutElement = await this.driver.findElement(this.continueButtonSuccess);
+        assert.ok(await checkoutElement.isDisplayed(), true, message)
     }
 }
 

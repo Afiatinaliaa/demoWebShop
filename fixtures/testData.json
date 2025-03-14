@@ -28,7 +28,8 @@
         "logoDisappear": "Logo not found",
         "logoutButtonDisappear": "Logout button not found",
         "bookEmpty": "Book list not found",
-        "item1Disappear": "Book not found"
+        "item1Disappear": "Book not found",
+        "failedCheckout": "Checkout failed!!"
     },
     "log": {
         "registPassed": "Registration Test Passed!",
