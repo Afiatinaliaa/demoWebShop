@@ -13,7 +13,7 @@ async function HomeTest() {
         let homePage;
 
         beforeEach(async function () {
-            this.timeout(10000)
+            this.timeout(20000)
 
             driver = await new Builder().forBrowser(browserName).build();
             loginPage = new LoginPage(driver);
@@ -24,25 +24,48 @@ async function HomeTest() {
             await homePage.open(testData.baseUrl)
         })
 
-        // it("TCH001 - View Book Product Category List", async function() {
-        //     this.timeout(10000)
-        //     await homePage.viewBookCategory();
-        //     await homePage.scrollToBottom();
-        //     await homePage.getBookItems();
-
-        //     //assertion
-        //     await homePage.verifyBookList(testData.bookList.book1, testData.bookList.book2, testData.bookList.book3, testData.message.bookEmpty)
-        //     await console.log(testData.log.allBookList)
-
-        // })
-
-        it("TCH002 - Add Single Product To Cart", async function() {
+        it("TCH001 - Add Single Product To Cart", async function() {
             this.timeout(10000)
             await homePage.addToCart();
 
             //assertion
             await homePage.verifyItemOnCart(testData.message.bookEmpty)
             await console.log("success add to cart")
+        })
+
+        it("TCH002 - Search Product Success", async function () {
+            await homePage.searchProduct(testData.productList.productValid);
+
+            //Assertion
+            await homePage.verifyResultVisible(testData.message.searchFailed)
+        })
+
+        it("TCH003 - Search Product Failed", async function () {
+            await homePage.searchProduct(testData.productList.productInvalid);
+
+            //Assertion
+            const errorText = await homePage.getSearchError();
+            await homePage.verifySearchError(testData.message.expectedSearchError, testData.message.searchSuccess)
+        })
+
+        it("TCH004 - Check Product Detail", async function () {
+            await homePage.productDetail()
+
+            //Assertion
+            await homePage.verifyProductImg(testData.message.productImgError)
+            await homePage.verifyProductPrice(testData.message.productPriceError)
+            await homePage.verifyProductDesc(testData.message.productDescError)
+        })
+
+        // it("TCH005 - Adding Product Review Successfully", async function () {
+        //     await homePage.productReviewSuccess(testData.productReview.reviewTitle, testData.productReview.reviewDesc)
+
+        //     //Assertion
+        //     await homePage.verifyReviewSubmitted(testData.message.expectedReviewSubmitted, testData.message.errorReviewSubmitted)
+        // })
+
+        afterEach(async function() {
+            await driver.quit()
         })
     })
 }

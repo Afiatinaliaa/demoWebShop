@@ -17,6 +17,24 @@ class HomePage{
         this.addToCartSuccess = By.css("#bar-notification")
         this.cartAfterAddItem1 = By.css("li[id='topcartlink'] a[class='ico-cart']")
         this.item1 = By.css("td[class='product']")
+        this.searchField = By.id("small-searchterms")
+        this.searchButton = By.css("input[value='Search']")
+        this.productItem = By.css(".product-item")
+        this.searchError = By.css(".result")
+        this.productName = By.css("div[class='product-grid home-page-product-grid'] div:nth-child(3) div:nth-child(1) div:nth-child(2) h2:nth-child(1) a:nth-child(1)")
+        this.productImg = By.css("#main-product-img-31")
+        this.productPrice = By.css(".price-value-31")
+        this.productDesc = By.css("div[class='full-description'] p")
+        this.productReviewLink = By.css("body > div:nth-child(4) > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > a:nth-child(3)")
+        this.reviewTitleField = By.id("AddProductReview_Title")
+        this.reviewDescField = By.id("AddProductReview_ReviewText")
+        this.rateStar1 = By.id("addproductrating_1")
+        this.rateStar2 = By.id("addproductrating_2")
+        this.rateStar3 = By.id("addproductrating_3")
+        this.rateStar4 = By.id("addproductrating_4")
+        this.rateStar5 = By.id("addproductrating_5")
+        this.submitButton = By.css("input[value='Submit review']")
+        this.reviewSubmitted = By.css("div[class='result']")
     }
 
     async open(url) {
@@ -79,6 +97,65 @@ class HomePage{
     async verifyItemOnCart(message) {
         const item1 = await this.driver.findElement(this.item1);
         assert.ok(await item1.isDisplayed(), true, message)
+    }
+
+    async searchProduct(productName) {
+        await this.driver.findElement(this.searchField).sendKeys(productName)
+        await this.driver.findElement(this.searchButton).click()
+    }
+
+    async verifyResultVisible(message) {
+        const searchResult = await this.driver.findElement(this.productItem);
+        const isProductDisplayed = await searchResult.isDisplayed();
+        assert.strictEqual(isProductDisplayed, true, message);
+    }
+
+    async getSearchError() {
+        return await this.driver.findElement(this.searchError).getText();
+    }
+    
+    async verifySearchError(expectedText, message){
+        const errorText = await this.getSearchError();
+        assert.strictEqual(errorText.includes(expectedText), true, message)
+    }
+
+    async productDetail() {
+        await this.driver.findElement(this.productName).click()
+    }
+
+    async verifyProductImg(message) {
+        const imgElement = await this.driver.findElement(this.productImg);
+        const isImgDisplayed = await imgElement.isDisplayed();
+        assert.strictEqual(isImgDisplayed, true, message);
+    }
+
+    async verifyProductPrice(message) {
+        const priceElement = await this.driver.findElement(this.productPrice);
+        const isPriceDisplayed = await priceElement.isDisplayed();
+        assert.strictEqual(isPriceDisplayed, true, message);
+    }
+
+    async verifyProductDesc(message) {
+        const descElement = await this.driver.findElement(this.productDesc);
+        const isDescDisplayed = await descElement.isDisplayed();
+        assert.strictEqual(isDescDisplayed, true, message);
+    }
+
+    async productReviewSuccess(reviewTitle, reviewDesc) {
+        await this.driver.findElement(this.productReviewLink).click()
+        await this.driver.findElement(this.reviewTitleField).sendKeys(reviewTitle)
+        await this.driver.findElement(this.reviewDescField).sendKeys(reviewDesc)
+        await this.driver.findElement(this.rateStar3).click()
+        await this.driver.findElement(this.submitButton).click()
+    }
+
+    async getSuccessSubmit() {
+        return await this.driver.findElement(this.reviewSubmitted).getText();
+    }
+
+    async verifyReviewSubmitted(expectedText, message) {
+        const titleText = await this.getSuccessSubmit();
+        assert.strictEqual(titleText.includes(expectedText), true, message)
     }
 }
 

@@ -3,9 +3,9 @@
     "cartUrl": "https://demowebshop.tricentis.com/cart",
     "checkoutUrl": "https://demowebshop.tricentis.com/onepagecheckout",
     "registValid": {
-        "fname": "lee",
-        "lname": "Kina",
-        "email": "lee.kinal@gmail.com",
+        "fname": "Bhumi",
+        "lname": "Kirana",
+        "email": "Bhumi.kirana@gmail.com",
         "pass": "Hana1234!",
         "confirmPass": "Hana1234!"
     },
@@ -20,7 +20,7 @@
     "accountName": "ueno.natsuki@gmail.com",
     "errorAccount": "Its not Natsuki Account!",
     "message": {
-        "successRegist": "Register",
+        "successRegist": "Your registration completed",
         "failedRegist": "Your registration failed. Please try again!",
         "expectedLoginError": "Login was unsuccessful. Please correct the errors and try again",
         "loginSuccess": "Login was successfull",
@@ -29,7 +29,16 @@
         "logoutButtonDisappear": "Logout button not found",
         "bookEmpty": "Book list not found",
         "item1Disappear": "Book not found",
-        "failedCheckout": "Checkout failed!!"
+        "successCheckout": "Your order has been successfully processed!",
+        "failedCheckout": "Checkout failed!!",
+        "searchFailed": "Product item not found",
+        "expectedSearchError": "No products were found that matched your criteria.",
+        "searchSuccess": "Product item available",
+        "productImgError": "Product not visible",
+        "productPriceError": "Product price not visible",
+        "productDescError": "Product description not visible",
+        "expectedReviewSubmitted": "Product review is successfully added.",
+        "errorReviewSubmitted": "Product review submit failed"
     },
     "log": {
         "registPassed": "Registration Test Passed!",
@@ -41,6 +50,14 @@
         "book1": "Computing and Internet",
         "book2": "Health Book",
         "book3": "Science"
+    },
+    "productList": {
+        "productValid": "Laptop",
+        "productInvalid": "Tablet"
+    },
+    "productReview": {
+        "reviewTitle": "XOXO product quality",
+        "reviewDesc": "This product quality is XOXO"
     }
 
 }

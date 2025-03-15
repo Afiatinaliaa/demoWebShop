@@ -31,6 +31,7 @@ class CheckoutPage {
         this.continueButtonStep6 = By.css("input[value='Confirm']")
         this.successCheckout = By.css(".section.order-completed")
         this.continueButtonSuccess = By.css("input[value='Continue']")
+        this.successText = By.css("div[class='title'] strong")
     }
 
     async open(url) {
@@ -64,8 +65,6 @@ class CheckoutPage {
     }
 
     async shippingAddress() {
-        // await this.driver.sleep(20000)
-        // await this.driver.findElement(this.pickupRadioBtn).click()
         const continueBtn2 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep2)), 20000);
         await continueBtn2.click();
     }
@@ -81,8 +80,6 @@ class CheckoutPage {
 
         const continueBtn3 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep3)), 20000);
         await continueBtn3.click();
-        // await this.driver.findElement(this.nextDayRadioBtn).click()
-        // await this.driver.findElement(this.continueButtonStep3).click()
     }
 
     async paymentMethod() {
@@ -96,8 +93,6 @@ class CheckoutPage {
 
         const continueBtn4 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep4)), 20000);
         await continueBtn4.click();
-        // await this.driver.findElement(this.poRadioBtn).click()
-        // await this.driver.findElement(this.continueButtonStep4).click()
     }
 
     async paymentInfo() {
@@ -109,19 +104,29 @@ class CheckoutPage {
         await poInput.sendKeys("000111222");
         const continueBtn5 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep5)), 20000);
         await continueBtn5.click();
-        // await this.driver.findElement(this.poNumberField).sendKeys("000111222")
-        // await this.driver.findElement(this.continueButtonStep5).click()
     }
 
     async confirmOrder() {
         const continueBtn6 = await this.driver.wait(until.elementIsVisible(this.driver.findElement(this.continueButtonStep6)), 20000);
         await continueBtn6.click();
-        // await this.driver.findElement(this.continueButtonStep6).click()
     }
 
     async verifySuccessCheckout(message) {
         const checkoutElement = await this.driver.findElement(this.continueButtonSuccess);
         assert.ok(await checkoutElement.isDisplayed(), true, message)
+    }
+
+    async getSuccessMessage() {
+        const successMessageElement = await this.driver.wait(
+            until.elementLocated(this.successText),
+            5000 // timeout 5 detik
+        );
+        return await successMessageElement.getText();
+    }
+    
+    async verifyCheckoutSuccess(expectedText, message){
+        const successMessage = await this.getSuccessMessage();
+        assert.strictEqual(successMessage.includes(expectedText), true, message)
     }
 }
 
