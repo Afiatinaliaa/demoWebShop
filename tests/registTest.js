@@ -13,7 +13,7 @@ async function RegistTest() {
         let homePage;
 
         before(async function () {
-            this.timeout(10000);
+            this.timeout(20000);
 
             driver = await new Builder().forBrowser(browserName).build();
             registPage = new RegistPage(driver);
@@ -25,10 +25,11 @@ async function RegistTest() {
 
         it("TCR001 - Registration Success", async function() {
             await registPage.regist(testData.registValid.fname, testData.registValid.lname, testData.registValid.email, testData.registValid.pass, testData.registValid.confirmPass)
+            this.timeout(30000)
 
             //assertion
-            // const titlePage = await homePage.getTitleText();
-            // await homePage.verifyRegistSuccess(testData.accountName, testData.errorAccount)
+            const registSuccess = await registPage.getSuccessPage();
+            await registPage.verifySuccessRegist(testData.message.successRegist, testData.message.failedRegist)
             await console.log(testData.log.registPassed)
         });
 
