@@ -38,7 +38,11 @@
         "productPriceError": "Product price not visible",
         "productDescError": "Product description not visible",
         "expectedReviewSubmitted": "Product review is successfully added.",
-        "errorReviewSubmitted": "Product review submit failed"
+        "errorReviewSubmitted": "Product review submit failed",
+        "reviewTitleAvailable": "Review Title isnt Empty",
+        "reviewDescAvailable": "Review Desc isnt Empty",
+        "addToCartFailed": "Bar Notification Not Found",
+        "expectedAddToCart": "The product has been added to your shopping cart"
     },
     "log": {
         "registPassed": "Registration Test Passed!",
@@ -57,7 +61,9 @@
     },
     "productReview": {
         "reviewTitle": "XOXO product quality",
-        "reviewDesc": "This product quality is XOXO"
+        "reviewDesc": "This product quality is XOXO",
+        "expectedTitleEmpty": "Review title is required.",
+        "expectedDescEmpty": "Review text is required."
     }
 
 }

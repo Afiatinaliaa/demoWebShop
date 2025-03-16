@@ -48,22 +48,6 @@ async function HomeTest() {
             await homePage.verifySearchError(testData.message.expectedSearchError, testData.message.searchSuccess)
         })
 
-        it("TCH004 - Check Product Detail", async function () {
-            await homePage.productDetail()
-
-            //Assertion
-            await homePage.verifyProductImg(testData.message.productImgError)
-            await homePage.verifyProductPrice(testData.message.productPriceError)
-            await homePage.verifyProductDesc(testData.message.productDescError)
-        })
-
-        // it("TCH005 - Adding Product Review Successfully", async function () {
-        //     await homePage.productReviewSuccess(testData.productReview.reviewTitle, testData.productReview.reviewDesc)
-
-        //     //Assertion
-        //     await homePage.verifyReviewSubmitted(testData.message.expectedReviewSubmitted, testData.message.errorReviewSubmitted)
-        // })
-
         afterEach(async function() {
             await driver.quit()
         })
